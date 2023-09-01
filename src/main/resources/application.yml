@@ -1,0 +1,55 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+    
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+      
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3307/photogram?serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&useSSL=false
+    username: cos
+    password: cos1234
+    
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+      
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 2MB
+
+  security:
+    user:
+      name: test
+      password: 1234
+
+
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 958637735760-6d5mnqbf474r67a20pur36p565c3qq3i.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+
+
+
+
+
+file:
+  path: C:/workspace_spring/springbootwork/upload/

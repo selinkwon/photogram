@@ -107,10 +107,10 @@ $(window).scroll(() => {
 		console.log("문서의 높이",$(window).height());
 		console.log("윈도우 높이",$(window).height());*/
 
-	let checkNum = $(window).scrollTop() - ($(window).height() - $(window).height());
+	let checkNum = $(window).scrollTop() + $(window).height();
 	console.log(checkNum);
 
-	if (checkNum < 1 && checkNum > -1) {
+	if (checkNum > $(document).height() - $(window).height() - 1) {
 		page++;
 		storyLoad();
 	}

@@ -14,8 +14,13 @@ let principalId = $("#principalId").val();
 
 // (1) 스토리 로드하기
 let page = 0;
+let loading = false;
 
 function storyLoad() {
+	if (loading) return; // 이미 로딩 중이라면 중복 실행 방지
+
+	loading = true;
+
 	$.ajax({
 		url: `/api/image?page=${page}`,
 		dataType: "json"
@@ -25,8 +30,11 @@ function storyLoad() {
 			let storyItem = getStoryItem(image);
 			$("#storyList").append(storyItem);
 		});
+		loading = false;
+		page++;
 	}).fail(error => {
 		console.log("오류", error);
+		loading = false;
 	});
 }
 
@@ -103,15 +111,13 @@ item +=`
 
 // (2) 스토리 스크롤 페이징하기
 $(window).scroll(() => {
-	/*	console.log("윈도우 scrollTop",$(window).scrollTop());
-		console.log("문서의 높이",$(window).height());
-		console.log("윈도우 높이",$(window).height());*/
+		// console.log("윈도우 scrollTop",$(window).scrollTop());
+		// console.log("문서의 높이",$(document).height());
+		// console.log("윈도우 높이",$(window).height());
 
 	let checkNum = $(window).scrollTop() + $(window).height();
-	console.log(checkNum);
 
-	if (checkNum > $(document).height() - $(window).height() - 1) {
-		page++;
+	if (checkNum > $(document).height() - 1) {
 		storyLoad();
 	}
 });
